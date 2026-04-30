@@ -142,7 +142,7 @@ bash scripts/validate_runtime_isaaclab.sh
 - `ISAACLAB_PATH` is set and contains executable `isaaclab.sh`.
 - `nvidia-smi` is available.
 - PyTorch sees CUDA.
-- `isaacsim`, `isaaclab`, and `pxr` import through Isaac Lab's Python wrapper.
+- `isaacsim` and `isaaclab` import correctly; `pxr`/USD imports are checked only through an Isaac Sim/Isaac Lab launched runtime.
 - Isaac Lab can list registered environments.
 - Go2, Unitree, or ANYmal candidate environments appear in the environment list.
 - `scripts/tutorials/00_sim/create_empty.py --headless` runs successfully.
