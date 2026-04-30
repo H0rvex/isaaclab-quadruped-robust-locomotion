@@ -1,0 +1,42 @@
+experiment:
+  name: go2_rough_dr
+  description: Rough-terrain Go2 training with moderate domain randomization.
+  stage: M5
+
+runtime:
+  isaac_lab: "2.3.2"
+  isaac_sim: "5.1.0"
+  python: "3.11"
+  pytorch: "2.7.0+cu128"
+  backend: rsl_rl
+
+task:
+  robot: Unitree Go2
+  task_id: Isaac-Velocity-Rough-Unitree-Go2-v0
+  fallback_task_id: Isaac-Velocity-Rough-Anymal-D-v0
+  terrain: rough
+
+training:
+  seed: 1
+  num_envs: 4096
+  max_iterations: 3000
+  headless: true
+
+domain_randomization:
+  level: moderate
+  friction_range: [0.6, 1.4]
+  base_mass_scale_range: [0.9, 1.1]
+  actuator_strength_scale_range: [0.85, 1.15]
+  joint_damping_scale_range: [0.8, 1.2]
+  observation_noise_std: 0.02
+  push_interval_seconds: 8.0
+  push_velocity_range: [0.0, 0.5]
+
+evaluation:
+  seed: 1000
+  episodes: 20
+  record_video: true
+
+artifacts:
+  results_dir: results
+  run_name: go2_rough_dr_seed_001

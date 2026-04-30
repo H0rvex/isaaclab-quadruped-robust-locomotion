@@ -1,0 +1,32 @@
+experiment:
+  name: go2_flat_baseline
+  description: Flat-terrain Unitree Go2 PPO baseline using Isaac Lab and RSL-RL.
+  stage: M2
+
+runtime:
+  isaac_lab: "2.3.2"
+  isaac_sim: "5.1.0"
+  python: "3.11"
+  pytorch: "2.7.0+cu128"
+  backend: rsl_rl
+
+task:
+  robot: Unitree Go2
+  task_id: Isaac-Velocity-Flat-Unitree-Go2-v0
+  fallback_task_id: Isaac-Velocity-Flat-Anymal-D-v0
+  terrain: flat
+
+training:
+  seed: 1
+  num_envs: 4096
+  max_iterations: 1500
+  headless: true
+
+evaluation:
+  seed: 1000
+  episodes: 20
+  record_video: true
+
+artifacts:
+  results_dir: results
+  run_name: go2_flat_seed_001

@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "isaaclab_quadruped"
+version = "0.1.0"
+description = "External Isaac Lab project utilities for robust quadruped locomotion experiments."
+readme = "ROADMAP.md"
+requires-python = ">=3.11,<3.12"
+license = { text = "MIT" }
+authors = [
+  { name = "Project Maintainer" }
+]
+dependencies = [
+  "pyyaml",
+  "numpy",
+  "pandas",
+  "matplotlib",
+  "rich",
+  "tqdm",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest",
+  "ruff",
+  "black",
+]
+
+[tool.setuptools]
+package-dir = { "" = "source" }
+
+[tool.setuptools.packages.find]
+where = ["source"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests/pure"]
+pythonpath = ["source"]
+addopts = "-q"
+
+[tool.black]
+line-length = 100
+target-version = ["py311"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["source", "scripts", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]

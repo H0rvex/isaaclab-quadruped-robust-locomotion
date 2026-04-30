@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Local environments
+.venv/
+venv/
+env/
+.env
+
+# Isaac Lab / training artifacts
+results/
+runs/
+logs/
+checkpoints/
+wandb/
+videos/
+*.pt
+*.pth
+*.onnx
+
+# OS/editor noise
+.DS_Store
+.vscode/

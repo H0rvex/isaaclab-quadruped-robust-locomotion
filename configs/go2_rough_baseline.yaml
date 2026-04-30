@@ -1,0 +1,32 @@
+experiment:
+  name: go2_rough_baseline
+  description: Rough-terrain Unitree Go2 PPO baseline without custom domain randomization.
+  stage: M3
+
+runtime:
+  isaac_lab: "2.3.2"
+  isaac_sim: "5.1.0"
+  python: "3.11"
+  pytorch: "2.7.0+cu128"
+  backend: rsl_rl
+
+task:
+  robot: Unitree Go2
+  task_id: Isaac-Velocity-Rough-Unitree-Go2-v0
+  fallback_task_id: Isaac-Velocity-Rough-Anymal-D-v0
+  terrain: rough
+
+training:
+  seed: 1
+  num_envs: 4096
+  max_iterations: 2500
+  headless: true
+
+evaluation:
+  seed: 1000
+  episodes: 20
+  record_video: true
+
+artifacts:
+  results_dir: results
+  run_name: go2_rough_seed_001
