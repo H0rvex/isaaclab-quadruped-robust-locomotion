@@ -1,0 +1,3 @@
+| policy | task_id | terrain | randomization | seed | evaluation_seed | episodes | mean_return | std_return | mean_episode_length | fall_rate | checkpoint_path |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| placeholder_go2_flat | Isaac-Velocity-Flat-Unitree-Go2-v0 | flat | none | 1 | 1000 | 2 | 0 | 0 | 1000 | 0 | results/checkpoints/placeholder_go2_flat.pt |

@@ -1,0 +1,22 @@
+{
+  "checkpoint_path": "results/checkpoints/placeholder_go2_flat.pt",
+  "episodes": 2,
+  "evaluation_seed": 1000,
+  "fall_rate": 0.0,
+  "mean_episode_length": 1000.0,
+  "mean_return": 0.0,
+  "per_episode_lengths": [
+    1000,
+    1000
+  ],
+  "per_episode_returns": [
+    0.0,
+    0.0
+  ],
+  "policy": "placeholder_go2_flat",
+  "randomization": "none",
+  "seed": 1,
+  "std_return": 0.0,
+  "task_id": "Isaac-Velocity-Flat-Unitree-Go2-v0",
+  "terrain": "flat"
+}

@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "isaaclab_quadruped"
 version = "0.1.0"
 description = "External Isaac Lab project utilities for robust quadruped locomotion experiments."
-readme = "ROADMAP.md"
+readme = "README.md"
 requires-python = ">=3.11,<3.12"
 license = { text = "MIT" }
 authors = [
@@ -35,9 +35,12 @@ package-dir = { "" = "source" }
 where = ["source"]
 
 [tool.pytest.ini_options]
-testpaths = ["tests/pure"]
+testpaths = ["tests"]
 pythonpath = ["source"]
 addopts = "-q"
+markers = [
+  "sim: rented-GPU Isaac Lab validation tests, skipped unless RUN_SIM_TESTS=1",
+]
 
 [tool.black]
 line-length = 100

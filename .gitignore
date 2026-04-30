@@ -15,7 +15,14 @@ env/
 .env
 
 # Isaac Lab / training artifacts
-results/
+results/*
+!results/eval/
+results/eval/*
+!results/eval/placeholder_go2_flat_eval.json
+!results/tables/
+results/tables/*
+!results/tables/summary.csv
+!results/tables/summary.md
 runs/
 logs/
 checkpoints/

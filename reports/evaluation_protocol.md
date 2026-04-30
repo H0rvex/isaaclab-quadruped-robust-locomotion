@@ -39,4 +39,4 @@ Each evaluation run should write one JSON file under `results/eval/`. The JSON s
 - `per_episode_returns`
 - `per_episode_lengths`
 
-The local `scripts/summarize_results.py` script aggregates these JSON files into `results/tables/evaluation_summary.csv` and `results/tables/evaluation_summary.md`.
+The local `scripts/summarize_results.py` script aggregates these JSON files into `results/tables/summary.csv` and `results/tables/summary.md`.

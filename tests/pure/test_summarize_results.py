@@ -44,10 +44,12 @@ def test_summarize_results_writes_csv_and_markdown(tmp_path) -> None:
     exit_code = module.main(["--eval-dir", str(eval_dir), "--out-dir", str(out_dir)])
 
     assert exit_code == 0
-    csv_path = out_dir / "evaluation_summary.csv"
-    markdown_path = out_dir / "evaluation_summary.md"
+    csv_path = out_dir / "summary.csv"
+    markdown_path = out_dir / "summary.md"
     assert csv_path.exists()
     assert markdown_path.exists()
+    assert (out_dir / "evaluation_summary.csv").exists()
+    assert (out_dir / "evaluation_summary.md").exists()
     assert "go2_flat" in markdown_path.read_text(encoding="utf-8")
     assert "mean_return" in csv_path.read_text(encoding="utf-8")
 
@@ -71,4 +73,4 @@ def test_summarize_results_can_compute_mean_from_episode_returns(tmp_path) -> No
     module = load_summarize_module()
     module.summarize(eval_dir, out_dir)
 
-    assert "2.0" in (out_dir / "evaluation_summary.csv").read_text(encoding="utf-8")
+    assert "2.0" in (out_dir / "summary.csv").read_text(encoding="utf-8")

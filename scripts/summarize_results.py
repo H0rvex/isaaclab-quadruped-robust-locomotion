@@ -52,13 +52,15 @@ def summarize(eval_dir: Path, out_dir: Path) -> tuple[Path, Path, int]:
     frame = rows_to_summary_frame(rows)
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    csv_path = out_dir / "evaluation_summary.csv"
-    markdown_path = out_dir / "evaluation_summary.md"
+    csv_path = out_dir / "summary.csv"
+    markdown_path = out_dir / "summary.md"
+    legacy_csv_path = out_dir / "evaluation_summary.csv"
+    legacy_markdown_path = out_dir / "evaluation_summary.md"
     frame.to_csv(csv_path, index=False)
-    markdown_path.write_text(
-        to_markdown_table(frame, columns=SUMMARY_COLUMNS) + "\n",
-        encoding="utf-8",
-    )
+    frame.to_csv(legacy_csv_path, index=False)
+    markdown = to_markdown_table(frame, columns=SUMMARY_COLUMNS) + "\n"
+    markdown_path.write_text(markdown, encoding="utf-8")
+    legacy_markdown_path.write_text(markdown, encoding="utf-8")
     return csv_path, markdown_path, len(frame)
 
 
