@@ -1,6 +1,14 @@
 from pathlib import Path
 
-FORBIDDEN_IMPORTS = ("import isaaclab", "import isaacsim", "import omni", "import pxr", "from pxr")
+FORBIDDEN_IMPORTS = (
+    "import isaaclab",
+    "import isaacsim",
+    "import omni",
+    "import pxr",
+    "from pxr",
+    "import rclpy",
+    "from rclpy",
+)
 
 
 def test_package_import_does_not_require_isaac_stack() -> None:
