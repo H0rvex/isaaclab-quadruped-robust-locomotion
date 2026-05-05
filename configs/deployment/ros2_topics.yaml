@@ -1,0 +1,23 @@
+bridge:
+  namespace: /go2
+  policy_rate_hz: 50.0
+  command_timeout_s: 0.25
+  state_timeout_s: 0.1
+
+topics:
+  joint_state:
+    name: /go2/joint_states
+    message_type: sensor_msgs/msg/JointState
+    direction: publish
+  imu:
+    name: /go2/imu
+    message_type: sensor_msgs/msg/Imu
+    direction: publish
+  command_velocity:
+    name: /go2/cmd_vel
+    message_type: geometry_msgs/msg/Twist
+    direction: subscribe
+  policy_action:
+    name: /go2/policy_action
+    message_type: trajectory_msgs/msg/JointTrajectory
+    direction: publish
