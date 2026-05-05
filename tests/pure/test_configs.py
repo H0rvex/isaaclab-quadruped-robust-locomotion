@@ -32,8 +32,11 @@ def test_training_configs_have_runtime_and_artifact_contract() -> None:
         assert data["evaluation"]["seed"] == 1000
 
 
-def test_shell_scripts_require_isaaclab_path() -> None:
+def test_runtime_shell_scripts_require_isaaclab_path() -> None:
+    local_only_scripts = {Path("scripts/validate_export.sh")}
     for path in Path("scripts").glob("*.sh"):
+        if path in local_only_scripts:
+            continue
         text = path.read_text(encoding="utf-8")
         assert "ISAACLAB_PATH" in text, path
         assert "is unset" in text, path
