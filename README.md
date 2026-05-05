@@ -42,7 +42,10 @@ The local GTX 1060 is for coding only and is not a supported training/runtime ta
 |   |-- evaluation_protocol.md
 |   |-- experiment_plan.md
 |   |-- failure_analysis.md
+|   |-- hardware_ready_interface.md
+|   |-- policy_export_plan.md
 |   |-- rental_gpu_log.md
+|   |-- ros2_bridge_plan.md
 |   `-- rented_gpu_validation_checklist.md
 |-- results/
 |   |-- eval/
@@ -96,6 +99,22 @@ This writes:
 
 - `results/tables/summary.csv`
 - `results/tables/summary.md`
+
+## Hardware Interface Documentation
+
+The local hardware-ready interface scaffold documents policy and ROS 2 boundary contracts without
+claiming real robot validation:
+
+- `reports/hardware_ready_interface.md` describes the policy input/output contract, observation
+  schema, action scaling, safety limits, ROS 2 topic contract, fake state publisher, and local vs
+  runtime boundaries.
+- `reports/policy_export_plan.md` defines the expected export metadata and rented-GPU export
+  evidence needed before an exported policy is credible.
+- `reports/ros2_bridge_plan.md` outlines the future ROS 2 bridge responsibilities and explicitly
+  separates local dictionary-based tests from a real ROS 2 node or robot driver.
+
+The current scaffold is local-only. It does not include a real hardware driver, ROS 2 runtime
+node, emergency stop integration, or real robot validation.
 
 ## Validation
 
