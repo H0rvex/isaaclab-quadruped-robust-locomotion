@@ -1,0 +1,62 @@
+policy:
+  name: go2_hardware_interface_contract
+  robot: Unitree Go2
+  control_rate_hz: 50.0
+  observation_dim: 45
+  action_dim: 12
+
+joint_names:
+  - FL_hip_joint
+  - FL_thigh_joint
+  - FL_calf_joint
+  - FR_hip_joint
+  - FR_thigh_joint
+  - FR_calf_joint
+  - RL_hip_joint
+  - RL_thigh_joint
+  - RL_calf_joint
+  - RR_hip_joint
+  - RR_thigh_joint
+  - RR_calf_joint
+
+observation_schema:
+  fields:
+    - name: base_angular_velocity
+      size: 3
+    - name: projected_gravity
+      size: 3
+    - name: command_velocity
+      size: 3
+    - name: joint_positions
+      size: 12
+    - name: joint_velocities
+      size: 12
+    - name: previous_actions
+      size: 12
+
+action_scaling:
+  scale: 0.25
+  default_joint_positions:
+    - 0.1
+    - 0.8
+    - -1.5
+    - -0.1
+    - 0.8
+    - -1.5
+    - 0.1
+    - 1.0
+    - -1.5
+    - -0.1
+    - 1.0
+    - -1.5
+
+safety:
+  action_lower: [-1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0]
+  action_upper: [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+  command_timeout_s: 0.25
+  max_linear_velocity_mps: 1.5
+  max_angular_velocity_radps: 1.5
+
+export_metadata:
+  expected_format: torchscript
+  source_config: configs/go2_rough_dr_curriculum.yaml
