@@ -29,6 +29,7 @@ def test_run_interface_demo_returns_summary_and_writes_json(tmp_path: Path) -> N
     assert summary["joint_count"] == 12
     assert summary["command_velocity"] == {"x": 0.5, "y": 0.0, "yaw": 0.1}
     assert summary["observation_validation_status"] == "PASS"
+    assert summary["action_limits"] == [-1.0, 1.0]
     assert summary["final_status"] == "PASS"
     assert len(summary["raw_action"]) == 12
     assert len(summary["clipped_action"]) == 12
@@ -85,5 +86,12 @@ def test_plain_summary_includes_reviewer_fields(tmp_path: Path) -> None:
     text = format_plain_summary(summary)
 
     assert "Policy name: go2_hardware_interface_contract" in text
+    assert "Local Hardware-Interface Contract Demo" in text
+    assert "Action limits: [-1.000, 1.000]" in text
+    assert "Scaled joint position targets:" in text
+    assert "FL_hip_joint: -0.150" in text
+    assert "FL_thigh_joint: 0.560" in text
+    assert "FL_calf_joint: -1.680" in text
+    assert "ROS 2 topic contract:" in text
     assert "Observation validation: PASS" in text
     assert "Final status: PASS" in text

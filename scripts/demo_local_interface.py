@@ -41,13 +41,13 @@ def main() -> int:
             topics_config_path=PROJECT_ROOT / "configs/deployment/ros2_topics.yaml",
             json_out=args.json_out,
         )
-        summary["json_out"] = str(args.json_out)
+        summary["json_out"] = _display_path(args.json_out)
         write_demo_summary(args.json_out, summary)
     except Exception as exc:
         summary = {
             "final_status": "FAIL",
             "error": str(exc),
-            "json_out": str(args.json_out),
+            "json_out": _display_path(args.json_out),
         }
         write_demo_summary(args.json_out, summary)
         print(format_plain_summary(summary), file=sys.stderr)
@@ -55,6 +55,13 @@ def main() -> int:
 
     print(format_plain_summary(summary))
     return 0
+
+
+def _display_path(path: Path) -> str:
+    try:
+        return path.resolve().relative_to(PROJECT_ROOT).as_posix()
+    except ValueError:
+        return path.as_posix()
 
 
 if __name__ == "__main__":

@@ -177,6 +177,10 @@ def run_interface_demo(
             "yaw": fake_sample["command_velocity"]["angular"]["z"],
         },
         "observation_validation_status": observation_validation_status,
+        "action_limits": [
+            min(contract.safety_limits.action_lower),
+            max(contract.safety_limits.action_upper),
+        ],
         "raw_action": list(raw_action),
         "clipped_action": list(clipped_action),
         "scaled_joint_targets": list(scaled_joint_targets),
@@ -201,24 +205,37 @@ def format_plain_summary(summary: dict[str, Any]) -> str:
     """Format a compact engineering-style terminal summary."""
 
     lines = [
-        "Local Hardware Interface Demo",
-        "-----------------------------",
+        "Local Hardware-Interface Contract Demo",
+        "--------------------------------------",
         f"Policy name: {summary.get('policy_name', 'unknown')}",
         f"Observation dimension: {summary.get('observation_dim', 'unknown')}",
         f"Action dimension: {summary.get('action_dim', 'unknown')}",
         f"Joint count: {summary.get('joint_count', 'unknown')}",
         f"Command velocity: {_format_mapping(summary.get('command_velocity', {}))}",
+        "",
         f"Observation validation: {summary.get('observation_validation_status', 'FAIL')}",
-        f"Raw action: {_format_sequence(summary.get('raw_action', []))}",
-        f"Clipped action: {_format_sequence(summary.get('clipped_action', []))}",
-        f"Scaled joint targets: {_format_sequence(summary.get('scaled_joint_targets', []))}",
-        "ROS 2 topic names:",
+        "",
+        "Action pipeline:",
+        f"  Action limits: {_format_sequence(summary.get('action_limits', []))}",
+        f"  Raw action: {_format_sequence(summary.get('raw_action', []))}",
+        f"  Clipped action: {_format_sequence(summary.get('clipped_action', []))}",
+        "  Scaled joint position targets:",
     ]
+    lines.extend(
+        f"    {joint_name}: {float(target):.3f}"
+        for joint_name, target in zip(
+            summary.get("joint_names", []),
+            summary.get("scaled_joint_targets", []),
+            strict=True,
+        )
+    )
+    lines.extend(["", "ROS 2 topic contract:"])
     topics = summary.get("ros2_topic_names", {})
     if isinstance(topics, dict):
         lines.extend(f"  {key}: {value}" for key, value in topics.items())
     else:
         lines.append("  unavailable")
+    lines.append("")
     if "json_out" in summary:
         lines.append(f"JSON artifact: {summary['json_out']}")
     if "error" in summary:
