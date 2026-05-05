@@ -100,6 +100,18 @@ This writes:
 - `results/tables/summary.csv`
 - `results/tables/summary.md`
 
+Run the local hardware-interface demo:
+
+```bash
+python scripts/demo_local_interface.py
+```
+
+The demo loads the deployment configs, builds the local policy and ROS 2 topic contracts,
+generates deterministic fake robot state, assembles and validates the 45D observation, clips and
+scales a fake 12D action, prints a compact interface summary, and writes
+`results/demo/local_interface_demo.json`. It is a local contract demo only, not Isaac Sim, ROS 2,
+or hardware validation.
+
 ## Hardware Interface Documentation
 
 The local hardware-ready interface scaffold documents policy and ROS 2 boundary contracts without
